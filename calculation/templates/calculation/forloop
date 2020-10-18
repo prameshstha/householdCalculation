@@ -1,0 +1,41 @@
+for(i=0; i<PdataSorted.length; i++){
+                    toReceive = PdataSorted[i]['giveORreceive'];
+                    console.log(toReceive, 'reveiver');
+
+                    for(i=0; i<NdataSorted.length; i++){
+                        var toGive = NdataSorted[i]['giveORreceive']; //retrieve form key of first index
+                        console.log(i, toGive, 'giver');
+                        var t = +toReceive + +toGive;
+                        console.log(t, 'give')
+                        var absGiver = Math.abs(toGive)
+                        console.log(absGiver, 'abs giver value');
+                        console.log(NdataSorted[i]['giveORreceive'], 'giver');
+
+                        //checking if giver is greater than receiver in absolute value
+                        if(absGiver>toReceive){
+                                var dis = absGiver-toReceive;
+                                finalData.push({
+                                        'FromName': NdataSorted[i]['name'],
+                                        'toName': PdataSorted[i]['name'],
+                                        'amount': toReceive,
+                                  });
+
+                                //receiver will be zero and giver will be absGiver-toReceive
+                                //update the both NdataSorted and PdataSorted with above value
+
+                            }else{
+                                var dis = +toReceive + +toGive;
+                                var finalData = []; // initializing new dict for calculated value
+                                finalData.push({
+                                        'FromName': NdataSorted[i]['name'],
+                                        'toName': PdataSorted[i]['name'],
+                                        'amount': absGiver,
+                                  });
+                                  //giver will be zero and receiver will be +toReceive + +toGive
+                                  //update the both NdataSorted and PdataSorted with above value
+                                  console.log(finalData);
+                                }
+
+
+                     }
+                    }

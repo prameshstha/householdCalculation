@@ -1,0 +1,40 @@
+
+
+<!-- Start Modal to add expenses in selected group -->
+<div class="modal fade" id="addExpenses" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="expModalLabel">Add Expenses</h5>
+        <button type="button" class="close" onclick="clearHtml()" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+            <form method="post" action="" id="formId" enctype="multipart/form-data">
+                Add Expenses to
+                <p id="groupExp" class="text-success">.</p>
+                {% csrf_token %}
+
+                <div class="d-flex flex-column"  id="editExp" style="height:200px">
+                    {{ExpensesForm}}
+<!--                    {% for field in ExpensesForm%}-->
+<!--                        {{field}}-->
+<!--                        {% for error in field.non_field_errors%}-->
+<!--                            <span style="color:red;">{{error}}</span>-->
+<!--                        {% endfor %}-->
+<!--                    {% endfor %}-->
+                </div>
+                <div class="mt-2 float-right">
+                  <input class="btn btn-primary " type="submit" value="Add" id="addExpBtn">
+                  <button type="button" class="btn btn-danger" onclick="clearHtml()" data-dismiss="modal">Close</button>{{post}}
+                </div>
+              </form>
+          <div id="addedExpMessage">
+
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end Modal to add expenses in selected group -->

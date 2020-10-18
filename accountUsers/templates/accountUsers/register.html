@@ -1,0 +1,52 @@
+{% extends 'household/master.html'%}
+{% load widget_tweaks %}
+{% block body %}
+    <meta charset="UTF-8">
+    <title>Register</title>
+<div class="container">
+    <h2>Register Here</h2>
+        {% if email %}
+        Hi {{email}},
+        {% endif %}
+    Let start the registration process.
+    <form class="form" method="post">
+        <div class="d-flex flex-column">
+
+        </div>
+        {% csrf_token %}
+        {% for field in registration_form %}
+        <div>
+            <div class="input-group mb-3" >
+              <div class="input-group-prepend">
+                <span class="input-group-text mb-2" id="basic-addon1">{{field.label_tag}}</span>
+              </div>
+                {{ field|add_class:"form-control mb-2 mr-sm-2" }}
+
+                {% for error in field.errors%}
+                    <span style="color:red;">{{error}}</span>
+                {% endfor %}
+            </div>
+
+        </div>
+        {% endfor %}
+        {% if registration_form.non_field_errors %}
+            <div style="color:red;">
+                <p>{{registration_form.non_field_errors}}</p>
+            </div>
+        {% endif %}
+        {% if not successMessage%}
+         <div class="input-group mb-3">
+                    <button type="submit" class="btn btn-primary  mb-2 mr-sm-2"> Register</button>
+                </div>
+        {% endif %}
+
+            {% if failMessage %}
+            <p class="{{class}}">{{failMessage}}</p>
+        {% endif %}
+
+    </form>
+    <p class="{{class}}">{{successMessage}}</p>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,127 @@
+var arrayOfObjects = [
+	{
+		name: 'Doris',
+		born: 1373925600000, // Mon, Jul 15 2013
+		num: 4,
+		sex: 'male'
+	},
+	{
+
+		name: 'Beyonce',
+		born: 1366832953000, // Wed, Apr 24 2013
+		num: 2,
+		sex: 'male'
+	},
+	{
+		name: 'Albert',
+		born: 1370288700000, // Mon, Jun 3 2013
+		num: 3,
+		sex: 'female'
+	},
+	{
+		name: 'Diana',
+		born: 1354412087000, // Sat, Dec 1 2012
+		num: 1,
+		sex: 'male'
+	}
+];
+// sort by born date
+// use slice() to copy the array and not just make a reference
+var byDate = arrayOfObjects.slice(0);
+byDate.sort(function(a,b) {
+	return a.num - b.num;
+});
+console.log('by date:');
+console.log(byDate);
+
+// sort by name
+var byName = arrayOfObjects.slice(0);
+byName.sort(function(a,b) {
+	var x = a.name.toLowerCase();
+	var y = b.name.toLowerCase();
+	return x < y ? -1 : x > y ? 1 : 0;
+});
+
+console.log('by name:');
+console.log(byName);
+
+
+///for loooppss
+
+
+               for (var receiver in PdataSorted) {
+                    console.log(receiver, 'key');
+                    // check if the property/key is defined in the object itself, not in parent
+                        //console.log(receiver, PdataSorted[receiver]);// gives all the dict data of first index
+                        var toReceive = PdataSorted[receiver]['giveORreceive']; //retrieve form key of first index
+                        //console.log(toReceive);
+
+
+                      //for loop for giver
+                        for(var giver in NdataSorted){
+                            console.log(giver, 'key');
+                            var toGive = NdataSorted[receiver]['giveORreceive']; //retrieve form key of first index
+
+                        //calculating
+                            sub = 0;
+                             for(i=toReceive; i>0; sub ){
+                                var t = +toReceive + +toGive;
+                                console.log(toReceive, toGive, t);
+                                sub = t;
+                                }
+                        }
+
+
+
+
+                }
+
+
+// other loops not working properly
+
+// for loop for reveiver data
+
+                    for (var receiver in PdataSorted) {
+                    // check if the property/key is defined in the object itself, not in parent
+                        //console.log(receiver, PdataSorted[receiver]);// gives all the dict data of first index
+                        var toReceive = PdataSorted[receiver]['giveORreceive']; //retrieve form key of first index
+                        console.log(receiver, toReceive, 'receiver');
+
+                      //for loop for giver
+
+                        for(var giver in NdataSorted){
+                            var toGive = NdataSorted[giver]['giveORreceive']; //retrieve form key of first index
+                            console.log(giver, toGive, 'giver');
+                            var t = +toReceive + +toGive;
+                            console.log(t, 'give')
+                            var absGiver = Math.abs(toGive)
+                            console.log(absGiver, 'abs giver value');
+
+                            if(absGiver>toReceive){
+                                var dis = absGiver-toReceive;
+                                var finalData = []; // initializing new dict for calculated value
+                                finalData.push({
+                                        'FromNAme': NdataSorted[giver]['name'],
+                                        'toName': PdataSorted[receiver]['name'],
+                                        'amount': toReceive,
+                                  });
+
+                                //receiver will be zero and giver will be absGiver-toReceive
+                                //update the both NdataSorted and PdataSorted with above value
+
+                            }else{
+                                var dis = +toReceive + +toGive;
+                                var finalData = []; // initializing new dict for calculated value
+                                finalData.push({
+                                        'FromNAme': NdataSorted[giver]['name'],
+                                        'toName': PdataSorted[receiver]['name'],
+                                        'amount': dis,
+                                  });
+                                  //giver will be zero and receiver will be +toReceive + +toGive
+                                  //update the both NdataSorted and PdataSorted with above value
+                            }
+                            console.log(finalData);
+
+                            }
+
+                        }

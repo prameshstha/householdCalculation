@@ -1,0 +1,62 @@
+{% load static %}
+<!--    photo gallery ko lagi -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.css">
+<!--    photo gallery ko lagi -->
+<div id="">
+    <div class="d-flex flex-row mt-3 border-top border-bottom" style="height:55px">
+        <div class="col text-center border-right {% if total_balance < 0%} text-danger {% else %} text-success {%endif%} ">Total Balance:<br> <span class="negative">${{total_balance}}</span></div>
+        <div class="col text-center border-right text-success">You owned:<br> <span class="negative">${{owned}}</span></div>
+        <div class="col text-center text-danger">You owe:<br> <span class="negative">{% if owe > 0%} -${{owe}}{% else %} ${{owe}} {%endif%}</span></div>
+    </div>
+
+{% for details in all_activities %}
+    {% if details.spender == request.user %}
+    <div class="mt-2 border-bottom d-flex flex-row justify-content-start tz-gallery ">
+        <div class="d-flex flex-row justify-content-start ">
+            <div class="p-1 ">
+                {% if details.spender.pro_pic %}
+                <a href="{{details.spender.pro_pic.url}}" >
+                    <img src="{{details.spender.pro_pic.url}}" style="height:40px; width:40px">
+                </a>
+                {% else %}
+                    <a href="{% static 'default.jpg' %} ">
+                    <img src="{% static 'default.jpg' %} " style="height:40px; width:40px">
+                </a>
+                {% endif %}
+
+            </div>
+            <div class="p-1">
+                {{details.spender.first_name}} added expenses for {{details.exp_note}} in Group {{details.group_id}} : ${{details.amount}}
+                <a href="{{details.bill.url}}" class="text-sm">See bill</a>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="d-flex flex-row justify-content-end border-bottom mt-2 tz-gallery">
+        <div class="d-flex flex-row justify-content-end">
+                <div class="p-1">{{details.spender.first_name}} added expenses for {{details.exp_note}} in Group {{details.group_id}} : ${{details.amount}}</div>
+            <a href="{{details.bill.url}}" class="text-sm">See bill</a>
+              <div class="p-1 tz-gallery">
+                {% if details.spender.pro_pic %}
+                <a href="{{details.spender.pro_pic.url}}" >
+                    <img src="{{details.spender.pro_pic.url}}" style="height:40px; width:40px">
+                </a>
+                {% else %}
+                    <a href="{% static 'default.jpg' %} ">
+                    <img src="{% static 'default.jpg' %} " style="height:40px; width:40px">
+                </a>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% endfor%}
+</div>
+<!--photo gallery ko lagi-->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
+<script>
+    baguetteBox.run('.tz-gallery');
+</script>
+<!--photo gallery ko lagi-->

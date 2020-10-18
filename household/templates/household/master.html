@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--    form deputy css-->
+
+<link rel="stylesheet" href="https://www.deputy.com/dptycms/wp-content/themes/deputy-v2/assets/deputy.19b958d3.css" />
+<link rel="stylesheet" href="https://www.deputy.com/dptycms/wp-content/themes/deputy-v2/assets/copilot.0a07dff1.css" />
+
+
+<!--    end deputy css-->
+</head>
+<div class="" style="height:20px"></div>
+<div class="container">
+    {% include 'snippets/headerNav.html' %}
+
+
+<body>
+<!--main body-->
+<style type="text/css">
+  .main{
+        min-height:100vh;
+        height:100%
+        }
+
+</style>
+
+<div class="main">
+
+    {% block body%}
+
+    {% endblock%}
+</div>
+<!--main body-->
+</body>
+<!--footer start-->
+{% include 'snippets/footer.html' %}
+<!--footer end-->
+
+<!--start ajax to add new member in a selected group-->
+
+<script type="text/javascript">
+    $(document).ready(function(event){
+        $(document).on('click', '#addNewMember', function(event){
+
+            var groupName = document.getElementById("ddl_groups").value;
+            console.log(ddl_groups.value, groupName, 'two names');
+            var newMember = document.getElementById('newMember').value
+            console.log(newMember, groupName);
+            if(newMember==""){
+                console.log('empty')
+                }
+            else{
+                event.preventDefault();
+                $.ajax({
+                    type: 'POST',
+                    url:'{% url 'calculation:addMember' %}',
+                    data:{'groupName': groupName, 'newMember': newMember, 'csrfmiddlewaretoken': '{{csrf_token}}'},
+                    dataType: 'json',
+                    success: function(response){
+                       $('#addedMessage').html(response['post'])
+                        console.log($('#addedMessage').html(response['post']));
+                        console.log($('#groupMemberCycle').html(response['groupMemberCycle']));
+                        console.log($('#currentGroupMember').html(response['newMember']));
+                    },
+                    error: function(response, e){
+                        $('#addedMessage').html(response['post'])
+                    }
+                });
+            }
+
+        });
+    });
+</script>
+
+<!--end ajax to add new member in a selected group-->
+
+<!--start ajax to add friend member in a selected group-->
+
+<script type="text/javascript">
+    $(document).ready(function(event){
+        $(document).on('click', '#addFriendMember', function(event){
+            var friendId = document.getElementById("newMember").value;
+            console.log(friendId);
+            var groupName = document.getElementById("ddl_created_groups").value;
+            console.log(ddl_created_groups.value, groupName, 'two names');
+            console.log(friendId, groupName, ddl_created_groups.selectedIndex);
+            if(ddl_created_groups.selectedIndex == 0){
+                console.log('empty')
+                }
+            else{
+                event.preventDefault();
+                $.ajax({
+                    type: 'POST',
+                    url:'{% url 'calculation:addFriendMember' %}',
+                    data:{'groupName': groupName, 'friendId': friendId, 'csrfmiddlewaretoken': '{{csrf_token}}'},
+                    dataType: 'json',
+                    success: function(response){
+                        idd=groupName;
+                       $('#addedFriendMessage').html(response['post'])
+                        console.log($('#addedFriendMessage').html(response['post']));
+                        console.log(idd);
+                    },
+                    error: function(rs, e){
+                        $('#addedFriendMessage').html(response['post'])
+                    }
+                });
+            }
+
+        });
+    });
+</script>
+
+<!--end ajax to add friend member in a selected group-->
+
+
+
+<!--start ajax search -->
+
+<script type="text/javascript">
+    $(document).ready(function(event){
+        $(document).on('keyup', '#newMember', function(event){
+            $("#search-results").fadeIn('slow');//display ul after keyup on search box.
+            console.log('working');
+            event.preventDefault();
+            var searchText = $("#newMember").val(); //get value form the textbox search
+            if (searchText)//checking if input is null// only run ajax if input is not null
+                {
+                $.ajax({
+                    type: 'POST',
+                    url:'{% url 'calculation:searchMembers' %}',
+                    data:{'search': 'addMembers','searchText': searchText, 'csrfmiddlewaretoken': '{{csrf_token}}'},
+                    dataType: 'json',
+                    success: function(response){
+                        $('#search-results').html(response['search']) //replacin ul with the html 'search' from view
+                        console.log($('#search-results').html(response['search']));
+                        console.log(searchText);
+                        console.log($("#newMember").val());
+
+                    },
+                    error: function(rs, e){
+                        console.log(rs.responseText);
+                    }
+                });
+            }//end if statement
+        });
+    });
+</script>
+<!--end ajax search -->
+<!--start search friends-->
+
+    <script type="text/javascript">
+    $(document).ready(function(event){
+        $(document).on('keyup', '#friendSearch', function(event){
+            $("#search-result").fadeIn('slow');//display ul after keyup on search box.
+            console.log('working');
+            event.preventDefault();
+            var searchText = $("#friendSearch").val(); //get value form the textbox search
+            if (searchText)//checking if input is null// only run ajax if input is not null
+                {
+                $.ajax({
+                    type: 'POST',
+                    url:'{% url 'calculation:searchMembers' %}',
+                    data:{'search': 'searchFriends','searchText': searchText, 'csrfmiddlewaretoken': '{{csrf_token}}'},
+                    dataType: 'json',
+                    success: function(response){
+                        $('#search-result').html(response['search']) //replacin ul with the html 'search' from view
+                        console.log($('#search-result').html(response['search']));
+                        console.log(searchText);
+                        console.log($("#friendSearch").val());
+
+                    },
+                    error: function(rs, e){
+                        console.log(rs.responseText);
+                    }
+                });
+            }//end if statement
+        });
+    });
+</script>
+
+<!--end search friends-->
+
+<!--start add expenses in group ajax-->
+
+<script type="text/javascript">
+    $(document).ready(function(event){
+        $(document).on('click', '#addExpBtn', function(event){
+        event.preventDefault();
+            var group_id = document.getElementById("ddl_groups").value;
+            var amount = document.getElementById("id_amount").value;
+            var exp_note = document.getElementById("id_exp_note").value;
+            var bill = document.getElementById("id_bill").value;
+            var formId1 = document.getElementById("formId");
+            console.log('formId1', formId1);
+            var formData = new FormData(formId1);
+            console.log('formData', formData);
+            formData.append('group_id', group_id);
+
+            if(ddl_groups.selectedIndex == 0){
+                console.log('empty')
+                }
+            else if(exp_note == '' | amount == ''){
+                console.log('empty note')
+            }
+            else{
+                event.preventDefault();
+                $.ajax({
+                    type: 'POST',
+                    url:'{% url 'calculation:addExpenses' %}',
+                    enctype: 'multipart/form-data',
+                    data:formData,
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    success: function(response){
+                        console.log(response['Added']);
+                        added = response['Added'];
+                      $('#addedExpMessage').html(response['keyError']);
+                        if(added == 'Added'){
+                            $('#addedExpMessage').html(response['post']);
+
+                            $('#GroupRecentActivities').html(response['group']);
+                            $('#Final_Transactions').html(response['final_transaction']);
+                               document.getElementById("id_amount").value = '';
+                               document.getElementById("id_exp_note").value = '';
+                               document.getElementById("formId").style.display = 'none';
+                        }
+                        else{
+                            $('#addedExpMessage').html(response['post'])
+                        }
+                    },
+                    error: function(response, e){
+                        $('#addedExpMessage').html(response['post'])
+                    }
+                });
+            }
+
+        });
+    });
+</script>
+
+<!--end add expenses in group ajax-->
+<!-- Start ajax script to settle calculation period-->
+
+<script type="text/javascript">
+$(document).ready(function(event){
+    $(document).on('click', '#settleBtn', function(event){
+
+        var groupName = document.getElementById("ddl_groups").value;
+        console.log(ddl_groups.value, groupName, 'two names');
+        console.log(groupName);
+
+            event.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url:'{% url 'calculation:settleCycle' %}',
+                data:{'groupName': groupName, 'csrfmiddlewaretoken': '{{csrf_token}}'},
+                dataType: 'json',
+                success: function(response){
+                   $('#settleMessage').html(response['post'])
+                    $('#GroupRecentActivities').html(response['group_activities']);
+                    $('#groupMemberCycle').html(response['groupMemberCycle']);
+                    console.log($('#settleMessage').html(response['post']));
+
+                },
+                error: function(response, e){
+                    $('#settleMessage').html(response['post'])
+                }
+            });
+    });
+});
+</script>
+
+<!-- End ajax script to settle calculation period-->
+<!-- Start invite email ajax   -->
+
+<script type="text/javascript">
+$(document).ready(function(event){
+    $(document).on('click', '#inviteEmailbtn', function(event){
+
+        var inviteEmail = document.getElementById("inviteEmail").value;
+        if(inviteEmail != ''){
+            event.preventDefault();
+                $.ajax({
+                    type: 'POST',
+                    url:'{% url 'inviteEmail' %}',
+                    data:{'inviteEmail': inviteEmail, 'csrfmiddlewaretoken': '{{csrf_token}}'},
+                    dataType: 'json',
+                    success: function(response){
+                       $('#inviteMessage').html(response['post'])
+                    },
+                    error: function(response, e){
+                        $('#inviteMessage').html(response['post'])
+                    }
+                });
+        }
+
+    });
+});
+</script>
+
+<!-- End invite email ajax   -->
+
+<!-- Start ajax script to create calculation period-->
+
+    <script type="text/javascript">
+$(document).ready(function(event){
+    $(document).on('click', '#startNewCycle', function(event){
+
+        var groupName = document.getElementById("ddl_groups").value;
+        console.log(ddl_groups.value, groupName, 'two names');
+        console.log(groupName);
+
+            event.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url:'{% url 'calculation:createCycle' %}',
+                data:{'groupName': groupName, 'csrfmiddlewaretoken': '{{csrf_token}}'},
+                dataType: 'json',
+                success: function(response){
+                   $('#cycleCreated').html(response['post'])
+                    $('#GroupRecentActivities').html(response['group_activities']);
+                    $('#groupMemberCycle').html(response['groupMemberCycle']);
+                    console.log($('#cycleCreated').html(response['post']));
+                },
+                error: function(response, e){
+                    $('#cycleCreated').html(response['post'])
+                }
+            });
+    });
+});
+</script>
+
+<!-- End ajax script to create calculation period-->
+
+
+<!-- Start ajax script to delete member-->
+
+<script type="text/javascript">
+function deleteMember(memId){
+
+var ddl = document.getElementById("ddl_groups");
+var group_id = ddl.value
+console.log('member id', memId, group_id)
+            event.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url:'{% url 'calculation:deleteMember' %}',
+                data:{'member_id': memId, 'group_id': group_id, 'csrfmiddlewaretoken': '{{csrf_token}}'},
+                dataType: 'json',
+                success: function(response){
+                   $('#currentGroupMember').html(response['post'])
+                    console.log($('#currentGroupMember').html(response['post']));
+                    $('#groupMemberCycle').html(response['groupMemberCycle']);
+                },
+                error: function(response, e){
+                    $('#currentGroupMember').html(response['post'])
+                }
+            });
+ }
+</script>
+
+<!-- End ajax script to delete member-->
+
+</div>
+
+</html>

@@ -1,0 +1,391 @@
+{% extends 'household/master.html'%}
+
+{% block body%}
+
+
+<head>
+  {% load static %}
+  <!-- meta -->
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Pramesh Shrestha</title>
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,300i,400,400i,500,500i,600,600i,700,700i|Playfair+Display:400,400i,700,700i,900,900i" rel="stylesheet">
+
+  <!-- Bootstrap CSS File -->
+  <link href="{% static 'lib/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+  <!-- Libraries CSS Files -->
+  <link href="{% static 'css/ionicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+  <link href="{% static 'lib/magnific-popup/magnific-popup.css' %}" rel="stylesheet">
+  <link href="{% static 'lib/hover/hover.min.css' %}" rel="stylesheet">
+
+  <!-- Main Stylesheet File -->
+  <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+  <!-- Responsive css -->
+  <link href="{% static 'css/responsive.css' %}" rel="stylesheet">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="{% static 'images/myImg/favicon.png' %}">
+
+  <!-- =======================================================
+    Theme Name: Folio
+    Theme URL: https://bootstrapmade.com/folio-bootstrap-portfolio-template/
+    Author: BootstrapMade.com
+    Author URL: https://bootstrapmade.com
+  ======================================================= -->
+</head>
+
+<body>
+
+  <!-- start section navbar -->
+  <nav id="main-nav">
+    <div class="row">
+      <div class="container">
+
+        <div class="logo brand brand-name navbar-left">
+          <a href="http://shresthapramesh.com.np">PRAMESH</a>
+        </div>
+
+        <div class="responsive"><i data-icon="m" class="ion-navicon-round"></i></div>
+
+        <ul class="nav-menu list-unstyled">
+          <li><a href="#header" class="smoothScroll">Home</a></li>
+          <li><a href="#about" class="smoothScroll">About</a></li>
+          <li><a href="#journal" class="smoothScroll">Portfolio</a></li>
+          <!-- <li><a href="" class="smoothScroll">Blog</a></li> -->
+          <li><a href="#contact" class="smoothScroll">Contact</a></li>
+        </ul>
+
+      </div>
+    </div>
+  </nav>
+  <!-- End section navbar -->
+
+
+  <!-- start section header -->
+  <div id="header" class="home">
+
+    <div class="container">
+      <div class="header-content">
+        <h1>I'm <span class="typed"></span></h1>
+        <p>developer, &#60;coder&#62, freelancer</p>
+
+        <ul class="list-unstyled list-social">
+          <li><a href="https://www.linkedin.com/in/pramesh-shrestha-1907778a/" target="_blank"><i class="ion-social-linkedin"></i></a></li>
+          <li><a href="https://www.facebook.com/prameshstha" target="_blank"><i class="ion-social-facebook"></i></a></li>
+          <li><a href="https://twitter.com/
+          172" target="_blank"><i class="ion-social-twitter"></i></a></li>
+          <li><a href="https://www.instagram.com/pramesh_man_united/" target="_blank"><i class="ion-social-instagram"></i></a></li>
+          <li><a href="https://github.com/prameshstha/" target="_blank"><i class="ion-social-github"></i></a></li>
+          <!-- <li><a href="#" target="_blank"><i class="ion-social-dribbble"></i></a></li> -->
+        </ul>
+      </div>
+
+      
+    </div>
+  </div>
+  <!-- End section header -->
+
+
+  <!-- start section about us -->
+  <div id="about" class="paddsection">
+    <div class="container">
+      <div class="row justify-content-between">
+
+        <div class="col-lg-4 ">
+          <div class="div-img-bg">
+            <div class="about-img">
+              <img src="{% static 'images/myImg/me.jpg' %}" class="img-responsive" alt="me">
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-7">
+          <div class="about-descr">
+
+            <p class="p-heading">I design, build websites.
+
+                Have a project, idea or problem you'd like to discuss? </p>
+            <p class="separator">I primarily use Python, but picking up a new framework or language is not a problem. I am comfortable developing
+                on frontend or backend as well as setting up and managing infrastructure. My bread and butter is 
+                <a href="https://www.djangoproject.com/" target="_blank" >Django</a> and its associate stacks for all sorts of projects: CMS websites,
+              database-driven web application, Web APIs. </br>
+              Tech:
+              Python/Django, MySQL, Bootstrap, SQL, C#, JAVA, ASP.NET, JavaScript, CSS, jQuery, Json, Redis.
+            </p>
+              <p class="separator">Helping start-ups, small businesses, and agencies achieve high quality websites and exceptional user experience.</p>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end section about us -->
+
+
+  <!-- start section services -->
+  <div id="services">
+    <div class="container">
+
+        <div class="services-carousel owl-theme">
+
+          <div class="services-block">
+
+            <i class="ion-ios-calculator"></i>
+            <span>Problem Solving</span>
+            <p class="separator">Ability to make informed decisions and take ownership in providing solutions to customers while working.</p>
+
+          </div>
+
+          <div class="services-block">
+
+            <i class="ion-ios-lightbulb-outline"></i>
+            <span>System Thinking</span>
+            <p class="separator">I can view systems from a broad prespective, rather than seeing only specific events in the system.</p>
+
+          </div>
+
+          <div class="services-block">
+
+            <i class="ion-ios-color-wand-outline"></i>
+            <span>WEB DESIGN</span>
+            <p class="separator">I enjoy Web design including layout, content and graphic design.</p>
+
+          </div>
+
+          <div class="services-block">
+
+            <i class="ion-social-android-outline"></i>
+            <span>API</span>
+            <p class="separator">Create a publicly available web-based API that returns data, likely in JSON,
+               to communicate with application </p>
+
+          </div>
+
+          <div class="services-block">
+
+            <i class="ion-ios-analytics-outline"></i>
+            <span>Communicating</span>
+            <p class="separator">I can explain things clearly, communicate problems quickly and write accurately and concisely. </p>
+
+          </div>
+
+          <div class="services-block">
+
+            <i class="ion-ios-camera-outline"></i>
+            <span>Organizing</span>
+            <p class="separator">Cordinate resources, policies and procedures to facilitate the goals identified in the project.</p>
+
+          </div>
+          <div class="services-block">
+
+              <i class="ion-social-python"></i>
+              <span>Python/Django</span>
+              <p class="separator">Used for developing both desktop and web applications. </p>
+  
+            </div>
+
+        </div>
+
+    </div>
+
+  </div>
+  <!-- end section services -->
+
+
+  <!-- start section portfolio -->
+ 
+  <!-- End section portfolio -->
+
+
+  <!-- start section journal -->
+  <div id="journal" class="text-left paddsection">
+
+    <div class="container">
+      <div class="section-title text-center">
+        <h2>Portfolio</h2>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="journal-block">
+        <div class="row">
+
+          <div class="col-lg-4 col-md-6">
+            <div class="journal-info">
+
+              <a href=""><img src="{% static 'images/myImg/blog-post-1.jpg' %} " class="img-responsive" alt="img"></a>
+
+              <div class="journal-txt">
+
+                <h4><a href="">Social Network</a></h4>
+                <p class="separator">Connect with you friends and family.
+                </p>
+
+              </div>
+
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <div class="journal-info">
+
+              <a href="http://ptc.com.np"><img src="{% static 'images/myImg/blog-post-2.jpg'  %} "class="img-responsive" alt="img"></a>
+
+              <div class="journal-txt">
+
+                <h4><a href="http://ptc.com.np">Household Calculation</a></h4>
+                <p class="separator">Calculate your household expenses.
+                </p>
+
+              </div>
+
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <div class="journal-info">
+
+              <a href=""><img src="{% static 'images/myImg/blog-post-3.jpg' %}" class="img-responsive" alt="img"></a>
+
+              <div class="journal-txt">
+
+                <h4><a href="">Online Market</a></h4>
+                <p class="separator">Buy and sell online.
+                </p>
+
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- End section journal -->
+
+
+  <!-- start sectoion contact -->
+  <div id="contact" class="paddsection">
+    <div class="container">
+      <div class="contact-block1">
+        <div class="row">
+
+          <div class="col-lg-6">
+            <div class="contact-contact">
+
+              <h2 class="mb-30">GET IN TOUCH</h2>
+
+              <ul class="contact-details">
+                <li><span>8/25 Sunset Drive, Coconut Groove</span></li>
+                <li><span>NT, 0810</span></li>
+                <li><span>Australia</span></li>
+                <li><span>+61 424 011 797</span></li>
+		<li><span><a href="mailto:pramesh11172@gmail.com">pramesh11172@gmail.com</a></span></li>
+              </ul>
+
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+          <form action="" method="post" role="form" class="contactForm">
+            {% csrf_token %}
+                    <div class="row">
+
+                            <div id="sendmessage" class="class">{{message}}</div>
+            
+                            <div class="col-lg-6">
+                              <div class="form-group contact-block1">
+                                <input type="text" name="name" class="form-control" required id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                                <div class="validation"></div>
+                              </div>
+                            </div>
+            
+                            <div class="col-lg-6">
+                              <div class="form-group">
+                                <input type="email" class="form-control" name="email" required id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
+                                <div class="validation"></div>
+                              </div>
+                            </div>
+            
+                            <div class="col-lg-12">
+                              <div class="form-group">
+                                <input type="text" class="form-control" name="subject" required id="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+                                <div class="validation"></div>
+                              </div>
+                            </div>
+            
+                            <div class="col-lg-12">
+                              <div class="form-group">
+                                <textarea class="form-control" name="message" rows="12" id="message" required data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
+                                <div class="validation"></div>
+                              </div>
+                            </div>
+            
+                            <div class="col-lg-12">
+                              <button type="submit" class="btn btn-defeault btn-send" value="Send message" id="send">Send Message</button>
+                            </div>
+            
+                          </div>
+                </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- start sectoion contact -->
+
+
+  <!-- start section footer -->
+  <div id="footer" class="text-center">
+    <div class="container">
+      <div class="socials-media text-center">
+
+        <ul class="list-unstyled">
+            <li><a href="https://www.linkedin.com/in/pramesh-shrestha-1907778a/"><i class="fa fa-linkedin pr-1"></i></a></li>
+            <li><a href="https://www.facebook.com/prameshstha"><i class="fa fa-facebook pr-1"></i></a></li>
+            <li><a href="https://twitter.com/pramesh11172"><i class="fa fa-twitter pr-1"></i></a></li>
+            <li><a href="https://www.instagram.com/pramesh_man_united/"><i class="fa fa-instagram pr-1"></i></a></li>
+            <li><a href="https://github.com/prameshstha/" target="_blank"><i class="fa fa-github pr-1"></i></a></li>
+            <li><a href="https://www.youtube.com/channel/UCHXAC0VOB0l-ESybTy0YIWw" target="_blank"><i class="fa fa-youtube pr-1"></i></a></li>
+            <li><a href="https://www.youtube.com/channel/UCHXAC0VOB0l-ESybTy0YIWw" target="_blank"><i class="fa fa-google pr-1"></i></a></li>
+            <!-- <li><a href="#"><i class="ion-social-dribbble"></i></a></li> -->
+        </ul>
+
+      </div>
+
+      <p>&copy; Copyrights Folio. All rights reserved.</p>
+
+    </div>
+  </div>
+  <!-- End section footer -->
+
+  <!-- JavaScript Libraries -->
+  <script src="{% static 'lib/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'lib/jquery/jquery-migrate.min.js' %}"></script>
+  <script src="{% static 'lib/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'lib/typed/typed.js' %}"></script>
+  <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'lib/magnific-popup/magnific-popup.min.js' %}"></script>
+  <script src="{% static 'lib/isotope/isotope.pkgd.min.js' %}"></script>
+
+  <!-- Contact Form JavaScript File -->
+  <script src="contactform/contactform.js"></script>
+
+  <!-- Template Main Javascript File -->
+  <script src="{% static 'js/main.js' %} "></script>
+
+</body>
+
+{% endblock%}

@@ -1,0 +1,46 @@
+
+<div class="modal fade" id="pastTransactions" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ptModalLabel">Past Transactions</h5>
+        <button type="button" class="close" onclick="clearHtml()" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+                <div class="p-2" id="ptTransactions" style="">
+                </div>
+        <div class="mt-2 float-right">
+                  <button type="button" class="btn btn-danger" onclick="clearHtml()" data-dismiss="modal">Close</button>{{post}}
+                </div>
+      <div id="ptMessage">
+
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function(event){
+        $(document).on('click', '#pastTransaction', function(event){
+            var friendId = document.getElementById("newMember").value;
+            console.log('click click');
+            event.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url:'{% url 'calculation:showPastTransactions' %}',
+                data:{'a': 'a', 'csrfmiddlewaretoken': '{{csrf_token}}'},
+                dataType: 'json',
+                success: function(response){
+                   $('#ptTransactions').html(response['post'])
+                    console.log($('#ptTransactions').html(response['post']));
+                },
+                error: function(response, e){
+                    $('#ptTransactions').html(response['post'])
+                }
+            });
+        });
+    });
+</script>

@@ -1,0 +1,47 @@
+<nav class="navbar navbar-expand-lg navbar-light ">
+
+      <a class="navbar-brand" href="{% url 'calculation:index' %}">Household</a>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon" ></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+             <li class="nav-item">
+             <a class="nav-link waves-effect waves-light" href="http://ptc.com.np">Test</a>
+            </li>
+
+          <li class="nav-item ">
+            <a class="nav-link waves-effect waves-light" href="{% url 'prameshshrestha' %}">
+              <i class="fas fa-envelope"></i> Creator
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link waves-effect waves-light" href="#">
+              <i class="fas fa-gear"></i>Pricing</a>
+          </li>
+                  </ul>
+
+          <ul class="navbar-nav ml-auto">
+            {% if request.user.is_authenticated %}
+            <li class="nav-item ">
+              <a class="nav-link"> Hi, {{request.user.username}}</a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="{% url 'calculation:my_profile' %}"> Profile </a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="{% url 'logout' %}"> Log out </a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link " href="{% url 'register' %}">Register</a>
+            </li>
+            <li>
+              <a class="nav-link " href="{% url 'login' %}">Login</a>
+            </li>
+            {% endif %}
+        </ul>
+      </div>
+    </nav>

@@ -1,0 +1,160 @@
+<!--Start style for snackbar message-->
+<style>
+#ftNotUpdated, #ftUpdated {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  top: 30px;
+  font-size: 17px;
+}
+#ftNotUpdated {
+    background-color: #d9534f;
+}
+#ftUpdated {
+    background-color: #5cb85c;
+}
+
+#ftNotUpdated.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+#ftUpdated.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {top: 0; opacity: 0;}
+  to {top: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {top: 0; opacity: 0;}
+  to {top: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {top: 30px; opacity: 1;}
+  to {top: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {top: 30px; opacity: 1;}
+  to {top: 0; opacity: 0;}
+}
+</style>
+<!--End style for snackbar message-->
+<div class="ml-2">Tick if you got paid. Send message if someone owe you money.<br> Once you tick, you CANNOT undo it.</div>
+<div class="d-flex flex-column p-2 m-2 card card-header" > <strong class="p-1"></strong>
+    <div class="d-flex text-info border-bottom ">
+        <div class="border-right" style="width:25%">Group</div>
+        <div class="border-right" style="width:55%">Transactions</div>
+        <div class="" style="width:20%">Actions</div>
+    </div>
+
+    <div class="m-2 ">
+               {% for pft in past_final_trans %}
+                    {% if pft.to_user == request.user or pft.from_user == request.user %}
+                        {% if pft.to_user == request.user %}
+                             <div class="p-1 row border-bottom ">
+                                 <div class="p-1 border-right" style="width:25%">{{pft.group_id}}</div>
+                                 <div class="p-1 border-right" style="width:55%">
+                                      {{pft.from_user.first_name}} owe you ${{pft.amount}}
+                                 </div>
+                                 <div id="checkPaid{{pft.id}}" class="p-1" style="width:20%">
+                                     {% if pft.is_paid %}
+                                        <input type="checkbox" checked="checked" onclick="return false;" > <span class="text-success" id="gotPaid">Got Paid </span>
+                                     {% else %}
+                                        <input type="checkbox" id="{{pft.id}}" name="afterPaidCheckbox" onclick="checkPaid(this.id)" class="inp" >
+                                        <span class="text-success " id="gotPaidNew{{pft.id}}" style="display:none;">Got Paid </span>
+                                        <a href="" id="envelop{{pft.id}}" name="envelop"><i class=" fa fa fa-envelope-o text-danger fa-lg"></i></a>
+                                     {% endif %}
+                                </div>
+                             </div>
+
+                        {% else %}
+                               <div class="p-1 row border-bottom ">
+                                   <div class="p-1 border-right" style="width:25%">{{pft.group_id}}</div>
+                                   <div class="p-1 border-right" style="width:55%">
+                                       You owe {{pft.to_user.first_name}} ${{pft.amount}}
+                                   </div>
+                                   <div class="p-1" style="width:20%">
+                                    {% if pft.is_paid %}
+                                        <label class="text-success p-1"> Paid </label>
+                                     {% else %}
+                                        <a href="#" class="text-danger p-1">Pay </a>
+                                     {% endif %}
+                                   </div>
+
+                             </div>
+                        {% endif %}
+                    {% endif %}
+               {% endfor %}
+    </div>
+</div>
+
+<script>
+    function checkPaid(id){
+        var envelop = document.getElementById('envelop'+id);
+        var input = document.getElementById(id);
+        var gotPaidNew = document.getElementById('gotPaidNew'+id);
+        console.log(id, envelop)
+
+        event.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url:'{% url 'calculation:final_transaction_sort' %}',
+            data:{'id': id, 'csrfmiddlewaretoken': '{{csrf_token}}'},
+            dataType: 'json',
+            success: function(response){
+                console.log('success');
+
+                input.setAttribute('onclick', 'return false;');
+                input.checked = true;
+                envelop.style.display = 'none';
+                gotPaidNew.style.display = 'inline';
+
+                var x = document.getElementById("ftUpdated");
+                x.className = "show";
+                setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+            },
+            error: function(response, e){
+                input.setAttribute('onclick', 'checkPaid(this.id)');
+                envelop.style.display = 'inline';
+                gotPaidNew.style.display = 'none';
+                console.log('error');
+
+                var x = document.getElementById("ftNotUpdated");
+                x.className = "show";
+                setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+
+            }
+        });
+
+    }
+</script>
+
+
+<!--<h2>Snackbar / Toast</h2>-->
+<!--<p>Snackbars are often used as a tooltips/popups to show a message at the bottom/top of the screen.</p>-->
+<!--<p>Click on the button to show the snackbar. It will disappear after 3 seconds.</p>-->
+
+<div id="ftUpdated" >Final Transaction updated</div>
+<div id="ftNotUpdated" >Something went wrong.</div>
+
+<script>
+function myFunction() {
+  var x = document.getElementById("snackbar");
+  x.className = "show";
+  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+}
+</script>

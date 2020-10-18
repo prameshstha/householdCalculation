@@ -1,0 +1,50 @@
+<script src="http://codeorigin.jquery.com/jquery-1.10.2.min.js"></script>
+<script>
+
+$(window).on('load', function(){
+    console.log('load');
+    var rand = Math.floor(Math.random()*2000);
+
+});
+
+</script>
+{% include 'household/master.html' %}
+{% block body%}
+<body>
+{{a}}
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+            Jeevan:  <input class="add" type="number" name="jeevan" id="jeevan" value="650"><br>
+            Sunil:  <input class="add"  type="number" name="sunil" id="sunil" value="350"><br>
+            Rohan:  <input class="add"  type="number" name="rohan" id="rohan" value="500"><br>
+            Bishal:  <input class="add"  type="number" name="bishal" id="bishal" value="100"><br>
+            Pradeep:  <input class="add"  type="number" name="pradeep" id="pradeep" value="300"><br>
+            Mohan:  <input class="add"  type="number" name="mohan" id="mohan" value="450"><br>
+            Nitin:  <input class="add"  type="number" name="nitin" id="nitin" value="700"><br>
+            Sandeep:  <input class="add"  type="number" name="sandeep" id="sandeep" value="400"><br>
+            Bigyan:  <input class="add"  type="number" name="bigyan" id="bigyan" value="250"><br>
+            Nischal:  <input class="add"  type="number" name="nischal" id="nischal" value="550"><br>
+        <button class="btn btn-dark" id="add">ADD</button>
+    </div>
+      <div class="col-sm" id="cal">
+      From <label id="from"></label>  to<label id="to"></label>
+    </div>
+    <div class="col-sm">
+        Instructions:<br/>
+        Hello! This is a static beta version for Household expenses calculation. Please try this and let me know if find any errors with is screenshot or it's description.
+        <br/>This is test for the logic rather than the design of the website. If logic in this calculation works perfectly we can create a full featured website.
+        <br/> Thank you!!!
+    </div>
+
+  </div>
+    <div>
+        <p>Total:  <label id="total" class="text-danger">0</label></p>
+        <p>Per Head:  <label id="perhead">0</label></p>
+    </div>
+</div>
+</body>
+{% endblock %}
+
+{% include 'calculation/calculation.js' %}

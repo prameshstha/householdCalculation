@@ -1,0 +1,22 @@
+            <div id="currentGroupMemberList">
+                 <div class="p-2">Selected group member of <strong>{{memberIngroup}}</strong>
+                 </div><span class="text-danger">{{messageNoDelete}}</span>
+                <div style="overflow: scroll; height:240px;">
+                    <div>
+                {% for members in memberIngroup.group_members.all %}
+                    <div class="bg-light p-2">
+                       {{members.first_name}}{% if memberIngroup.group_admin == request.user and members != request.user %}
+                        <a href="" onclick="test(this.id)" id="{{members.id}}" data-toggle="modal" name="" data-target="#changeAdmin"  data-backdrop="static" data-keyboard="false">
+                            <i  class="fa fa-user-plus p-2 text-info" title="Make Admin" ></i>
+                        </a>{% endif %}
+
+                    </div>
+
+                {% endfor %}
+            </div></div>
+
+            </div>
+
+
+
+

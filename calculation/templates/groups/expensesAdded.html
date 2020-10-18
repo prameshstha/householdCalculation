@@ -1,0 +1,17 @@
+{% if keyError %}
+    <p class="text-danger">{{keyError}}</p>
+{% else %}
+    <div id="addMore" ><p>{{memberAdded}}</p>
+
+    <button class="btn btn-primary" onclick="ShowForm()">Add more</button>
+    </div>
+    <script>
+        function ShowForm(){
+
+            document.getElementById("formId").style.display = 'block';
+            document.getElementById("addMore").style.display = 'none';
+        }
+    </script>
+{% endif %}
+
+

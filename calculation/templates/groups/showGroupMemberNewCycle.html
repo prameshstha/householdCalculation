@@ -1,0 +1,14 @@
+            <div id="GroupMemberListCycle" style="height:200px">
+                 <div class="p-2">Selected group member of <strong>{{memberIngroup}}</strong></div><span class="text-danger">{{messageNoDelete}}</span>
+                {% for members in memberIngroup.group_members.all %}
+                    <div class="bg-light p-2">
+                       {{members.first_name}}{% if memberIngroup.group_admin == request.user and members != request.user %}
+                        <a onclick="deleteMember(this.id)" id="{{members.id}}">
+                            <i  class="fa fa-trash p-2 text-danger" data-toggle="tooltip" title="Delete member" ></i>
+                        </a>{% endif %}
+                    </div>
+
+                {% endfor %}
+
+
+            </div>

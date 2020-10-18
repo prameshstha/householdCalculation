@@ -1,0 +1,42 @@
+<!-- Start Modal to start period in specific group -->
+
+
+    <div class="modal fade" id="startCycleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+              <div>
+                <h5 class="modal-title" id="exampleModalLabel">Add member or remove members to Start Calculation Period</h5>
+                  <span> You cannot add or remove members from a group after one calculation period started.</span>
+              </div>
+            <button type="button" class="close" onclick="clearHtml()" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" id="cycleCreated">
+              <div class="d-flex flex-column ">
+                  <div class="">
+                      <button class="btn btn-sm float-left" id="addMemData" data-toggle="modal" data-target="#addMembers" data-backdrop="static" data-keyboard="false">
+                        <a role="button" id="addMember" onclick="warningToMakeChanges()" class="text-primary" data-toggle="tooltip" data-placement="top" title="Add Member to group">
+                            <i class="fa fa-user-plus"> Add Member</i>
+                        </a>
+                      </button>
+                  </div>
+
+                  <div id="groupMemberCycle" class=" p-2" style="height:300px">
+
+
+                  </div>
+              </div>
+              <div class="mt-2 float-right">
+                 <input class="btn btn-primary " type="submit" value="Start New Period" id="startNewCycle">
+                 <button type="button" class="btn btn-danger" onclick="clearHtml()" data-dismiss="modal">Close</button>
+              </div>
+              <div id="periodMessage">
+
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<!--end modal to start period in specific group-->

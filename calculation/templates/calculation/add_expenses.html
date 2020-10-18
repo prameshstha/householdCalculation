@@ -1,0 +1,72 @@
+{% extends 'household/master.html' %}
+{% load static %}
+{% block body%}{{ MEDIA_URL.url }}
+{% static 'file'%}
+<img src="/media/images/test/AelBudget-2020-10-03_153333.029403.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-5">
+                <h2>Add Expenses</h2>
+                <form method="POST" class="post-form">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </form>
+            </div>
+            <div class="col-5">
+                <h2>My Expenses</h2>
+                    <li class="list-item"> Expenses List on Date.<button type="submit" class="btn btn-success">Edit</button></li>
+            </div>
+            <div class="col-2">
+                Others
+            </div>
+        </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm">
+          One of three columns
+        </div>
+        <div class="col-sm">
+          Two of three columns
+        </div>
+        <div class="col-sm">
+          Three of three columns
+        </div>
+      </div>
+    </div>
+{% endblock%}
+<script>
+var jeevan = parseInt($('#jeevan').val());
+        var sunil = parseInt($('#sunil').val());
+        var rohan = parseInt($('#rohan').val());
+        var bishal = parseInt($('#bishal').val());
+        var pradeep = parseInt($('#pradeep').val());
+        var mohan = parseInt($('#mohan').val());
+        var nitin = parseInt($('#nitin').val());
+        var sandeep = parseInt($('#sandeep').val());
+        var bigyan = parseInt($('#bigyan').val());
+        var nischal = parseInt($('#nischal').val());
+
+        var total = jeevan+sunil+rohan+bishal+pradeep+mohan+nitin+sandeep+bigyan+nischal;
+
+
+function add() {
+            var sum = 0;
+            var perhead = 0;
+            $(".add").each(function() {
+                sum += +this.value;
+            });
+            // an add function shouldn't really "alert"
+            perhead = sum/10;
+            $('#total').html(sum);
+            $('#perhead').html(perhead);
+            }
+
+            $('#add').click(function() {
+            add();
+            $(".add").each(function() {
+                $(".add").val('');
+            });
+            });
+    </script>

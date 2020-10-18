@@ -1,0 +1,12 @@
+<div> {{user}}({{userEmail}}) settled old calculation cycle from '{{start_period}}' to '{{end_period}}' in group '{{group}}'.</div>
+
+<strong>Here is the Final Transaction for this period.</strong>
+
+{% for ft in final_transaction_email %}
+<div>
+    {{ft.from_user.first_name}}->  {{ft.to_user.first_name}}-> ${{ft.amount}}
+</div>
+
+{% endfor %}
+<p> User the link below to access all the group activitis.</p>
+<a href="{{dashboard_link}}" class="text-primary" >Dashboard</a>

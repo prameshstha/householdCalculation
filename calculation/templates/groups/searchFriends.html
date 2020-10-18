@@ -1,0 +1,30 @@
+{% if searchUser.count > 0 %}
+    {% for searchUser in searchUser %}
+    <div class=" p-2 float-left d-flex flex-row justify-content-center" >
+        
+        <div class="p-2 border-right" id="friendUser">{{ searchUser }}</div>
+        <div class="p-2"> {{ searchUser.first_name }}</div>
+    </div>
+    {% endfor %}
+
+{% else %}
+
+    <li style="">Nothing to display!!!</li>
+    <style>
+        #search-result{ display:none}
+    </style>
+
+{% endif %}
+
+<script>
+    function getId(id){
+        console.log(id);
+        document.getElementById('addFriendMember').setAttribute('name', id);
+        a = document.getElementById('friendUser').innerHTML;
+        document.getElementById('userEmail').innerHTML=a;
+
+
+    }
+</script>
+
+

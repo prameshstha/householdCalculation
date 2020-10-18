@@ -1,0 +1,27 @@
+{% extends 'household/master.html'%}
+
+{% block body%}
+    <meta charset="UTF-8">
+<title>Activation Message</title>
+{% if success == 'success' %}
+    <!--Account activation successful.-->
+    <div class="container">
+        Congratulations!!!
+        <span class="text-success">{{activationMessage}}.</span>
+        <p><a href="{% url 'login' %}" class="text-primary">Login</a> to access this website.</p>
+    </div>
+{% elif success == 'already' %}
+    <!--Account activation fail.-->
+    <div class="container">
+        <span class="text-info">{{activationMessage}}</span>
+        <p><a href="{% url 'login' %}" class="text-primary">Login</a></p>
+    </div>
+
+    <!--already activated-->
+{% elif success == 'fail' %}
+    <div class="container">
+    <span class="text-danger">{{activationMessage}}</span>
+    <p><a href="{% url 'resend_activation_link' %}" class="text-primary">Resend Link</a></p>
+</div>
+{% endif %}
+{% endblock %}

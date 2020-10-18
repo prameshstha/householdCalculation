@@ -1,0 +1,9 @@
+<strong>Here is the Final Transaction for this period.</strong>
+
+{% for ft in final_transaction %}
+<div>
+    {{ft.from_user.first_name}}->  {{ft.to_user.first_name}}-> ${{ft.amount}}
+</div>
+
+
+{% endfor %}

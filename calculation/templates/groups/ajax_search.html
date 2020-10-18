@@ -1,0 +1,26 @@
+{% if searchUser.count > 0 %}
+    {% for searchUser in searchUser %}
+    <li onclick="transferToTextbox(this.id)" class="dropdown" value="{{searchUser}}" id="{{searchUser.id}}" style="border:none;">{{ searchUser }}</li>
+    {% endfor %}
+
+{% else %}
+
+    <li style="">Nothing to display!!!</li>
+    <style>
+        #search-results{ display:none}
+    </style>
+
+{% endif %}
+<script>
+    function transferToTextbox(id){
+        var textbox = document.getElementById('newMember');
+        var list = document.getElementById('search-results');
+        var listResult = document.getElementById(id).getAttribute('value');
+        console.log(listResult, id);
+        textbox.value = listResult;
+        list.style.display = 'none';
+
+    }
+</script>
+
+

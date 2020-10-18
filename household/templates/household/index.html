@@ -1,0 +1,65 @@
+{% extends 'household/master.html'%}
+{% load widget_tweaks %}
+{% block body %}
+    <meta charset="UTF-8">
+    <title>Home</title>
+
+
+<body class="home page-template page-template-templates page-template-page_home page-template-templatespage_home-php page page-id-8115 et_monarch" data-template="page_home" itemscope="" itemtype="http://schema.org/WebPage">
+
+<main>
+    <div class="site">
+        <div class="mosaic mosaic--AU mb-md-80">
+            <div class="mosaic-left mb-md-60 mb-lg-0">
+                <div class="mosaic-left-inner">
+                    <h1 class="type-h1 mb-10 mb-md-10">Get started in minutes, <br class="rwd-break">roster staff efficiently <br class="rwd-break">and connect your teams</h1>
+                    <h2 class="type-h3 mb-10 mb-sm-20">An easier way to manage your staff. <br />Anywhere, anytime.
+                    </h2>
+                <!--My form-->
+
+                    <form class=" d-flex flex-column" method="post">
+                        {% csrf_token %}
+                        {% for field in registration_form %}
+                        <div>
+                            <div class="" >
+                              <div class="">
+                                <span class="" id="basic-addon1">{{field.label_tag}}</span>
+                              </div>
+                                {{ field|add_class:"form-control mb-2 mr-sm-2" }}
+
+                                {% for error in field.errors%}
+                                    <span style="color:red;">{{error}}</span>
+                                {% endfor %}
+                            </div>
+
+                        </div>
+                        {% endfor %}
+                        {% if registration_form.non_field_errors %}
+                            <div style="color:red;">
+                                <p>{{registration_form.non_field_errors}}</p>
+                            </div>
+                        {% endif %}
+
+                        <div class="input-group mb-3">
+                            <button type="submit" class="btn btn-primary  mb-2 mr-sm-2">Register</button>
+                        </div>
+                            {% if success_message %}
+                            <p class="text-success">{{success_message}}</p>
+                        {% endif %}
+
+                    </form>
+
+                <!--end my form    -->
+                </div>
+            </div>
+            <div class="mosaic-right d-md-flex border">
+                <img class="js-lazy" src="https://www.deputy.com/static/homepage-032020/hero-homepage.png" >
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+{% endblock %}
+

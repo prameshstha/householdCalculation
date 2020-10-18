@@ -1,0 +1,808 @@
+{% extends 'household/master.html'%}
+{% load static %}
+{% block body%}
+<!--start style for font awesome logo-->
+<style>
+    .fa-facebook {
+  background: #3B5998;
+  color: white;
+}
+
+.fa-twitter {
+  background: #55ACEE;
+  color: white;
+}
+
+.fa-google {
+  background: #dd4b39;
+  color: white;
+}
+
+.fa-linkedin {
+  background: #007bb5;
+  color: white;
+}
+
+.fa-youtube {
+  background: #bb0000;
+  color: white;
+}
+
+.fa-instagram {
+  background: #125688;
+  color: white;
+}
+
+.fa-pinterest {
+  background: #cb2027;
+  color: white;
+}
+
+.fa-snapchat-ghost {
+  background: #fffc00;
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.fa-skype {
+  background: #00aff0;
+  color: white;
+}
+
+.fa-android {
+  background: #a4c639;
+  color: white;
+}
+
+.fa-dribbble {
+  background: #ea4c89;
+  color: white;
+}
+
+.fa-vimeo {
+  background: #45bbff;
+  color: white;
+}
+
+.fa-tumblr {
+  background: #2c4762;
+  color: white;
+}
+
+.fa-vine {
+  background: #00b489;
+  color: white;
+}
+
+.fa-foursquare {
+  background: #45bbff;
+  color: white;
+}
+
+.fa-stumbleupon {
+  background: #eb4924;
+  color: white;
+}
+
+.fa-flickr {
+  background: #f40083;
+  color: white;
+}
+
+.fa-yahoo {
+  background: #430297;
+  color: white;
+}
+
+.fa-soundcloud {
+  background: #ff5500;
+  color: white;
+}
+
+.fa-reddit {
+  background: #ff5700;
+  color: white;
+}
+
+.fa-rss {
+  background: #ff6600;
+  color: white;
+}
+</style>
+<!--end style for font awesome logo-->
+
+<!--start style for font awesome background-->
+<style>
+
+ .fa:hover {
+    opacity: 0.7;
+
+}
+    .btn-facebook {
+  background: #3B5998;
+  color: white;
+}
+
+.btn-twitter {
+  background: #55ACEE;
+  color: white;
+}
+
+.btn-google {
+  background: #dd4b39;
+  color: white;
+}
+
+.btn-linkedin {
+  background: #007bb5;
+  color: white;
+}
+
+.btn-youtube {
+  background: #bb0000;
+  color: white;
+}
+
+.btn-instagram {
+  background: #125688;
+  color: white;
+}
+
+.btn-pinterest {
+  background: #cb2027;
+  color: white;
+}
+
+.btn-snapchat-ghost {
+  background: #fffc00;
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.btn-skype {
+  background: #00aff0;
+  color: white;
+}
+
+.btn-android {
+  background: #a4c639;
+  color: white;
+}
+
+.btn-dribbble {
+  background: #ea4c89;
+  color: white;
+}
+
+.btn-vimeo {
+  background: #45bbff;
+  color: white;
+}
+
+.btn-tumblr {
+  background: #2c4762;
+  color: white;
+}
+
+.btn-vine {
+  background: #00b489;
+  color: white;
+}
+
+.btn-foursquare {
+  background: #45bbff;
+  color: white;
+}
+
+.btn-stumbleupon {
+  background: #eb4924;
+  color: white;
+}
+
+.btn-flickr {
+  background: #f40083;
+  color: white;
+}
+
+.btn-yahoo {
+  background: #430297;
+  color: white;
+}
+
+.btn-soundcloud {
+  background: #ff5500;
+  color: white;
+}
+
+.btn-reddit {
+  background: #ff5700;
+  color: white;
+}
+
+.btn-rss {
+  background: #ff6600;
+  color: white;
+}
+
+</style>
+<!--end style for font awesome background-->
+
+<!--start css for maintaining height of main body and setting active div of left and right sidebar-->
+<style type="text/css">
+    .container{
+        min-height:100vh;
+        height:100%;
+    }
+    .activeDiv{
+        background-color:#f2f2f2;
+    }
+    .activeDiv1{
+        background-color:#f2f2f2;
+    }
+</style>
+<!--end css for maintaining height of main body and setting active div of left and right sidebar-->
+
+<!--Start main div-->
+
+<div class="container mt-5">
+  <div class="row">
+      <!--Start left side bar -->
+    <div class="col-sm-3 m-1" id="left">
+        <div id="dashboard" class="leftside activeDiv" onclick="showHideDiv(this.id)"  ><a class="btn btn-link " >Dashboard</a></div>
+        <div id="groups" class="leftside" onclick="showHideDiv(this.id)">
+            <a class="btn btn-link" >Groups</a>
+
+        </div>
+        <div id="recent" class="leftside" onclick="showHideDiv(this.id)"><a class="btn btn-link" >Recent activities</a></div>
+        <div id="allExpenses" class="leftside" onclick="showHideDiv(this.id)"><a class="btn btn-link" >All Expenses</a></div>
+        <div id="friends" class="leftside" onclick="showHideDiv(this.id)"><a class="btn btn-link" >Friends</a></div>
+        <div id="invite" class="leftside" onclick="showHideDiv(this.id)"><a class="btn btn-link" >Invite</a></div>
+        <div id="share" class="leftside" onclick="showHideDiv(this.id)"><a class="btn btn-link" >Share</a></div>
+        <div id="whoOwns" class="leftside p-2 border" style="height:250px;">Who Owns How much
+            <div id="Final_Transactions">
+
+            </div>
+            <div>
+                <a class="text-primary" id="pastTransaction" href="" data-toggle="modal" data-target="#pastTransactions" data-backdrop="static" data-keyboard="false">See Past Transactions</a>
+<!-- Start model to show past Transactions-->
+{% include 'groups/modalPastTransaction.html'%}
+
+<!-- Start Modal to show warning to chance admin -->
+<div class="modal fade" id="changeAdmin" tabindex="-1" role="dialog" aria-labelledby="imagesModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="expModalLabel">Change admin??</h5>
+        <button type="button" class="close" onclick="clearHtml()" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <form method="post" action="{% url 'calculation:makeAdmin' %}">
+              {% csrf_token %}
+              <input id="gid" name="g_id" hidden >
+              <input id="mid" name="m_id" hidden >
+
+              <input type='submit' class="btn btn-info" id="confirmChange" value="Change Admin">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+<!--adding href in modal box after warning to make another admin-->
+function test(id){
+    var ddl_groups = document.getElementById("ddl_groups");
+    var gid = document.getElementById("gid");
+    var mid = document.getElementById("mid");
+    gid.value = ddl_groups.value;
+    mid.value = id;
+
+
+}
+</script>
+<!-- end Modal to show warning to chance admin -->
+
+
+<!-- End model to show past Transactions-->
+            </div>
+        </div>
+    </div>
+      <!--End left side bar -->
+<!--   start  div in the middle-->
+    <div class="col-sm-6 card  m-1 shadow rounded main">
+        <!--start toggle div for left sidebar-->
+        <div id="dashboard1" class="CustomToggle" >
+            <div class="d-flex flex-row mt-3">
+                <div class=" border-right p-2">Let's get started. Add your expenses. Calculate and split with you group members</div>
+                <div class="p-2">To add expenses and settle down your expenses go to group tab and click the button.
+<!--                    <button class="btn btn-primary">Add Expenses</button>-->
+<!--                    <button class="btn btn-success">Settle</button>-->
+                </div>
+
+            </div>
+            {% include 'groups/GroupAllRecentActivities.html' %}
+        </div>
+        <div id="groups1" class="CustomToggle" style="display:none;">
+            <div class="d-flex flex-row mt-3">
+                <div class="col-6">
+                    <div class="">
+                        Select your group to see activities and add members.
+                        <p id="adminOnlyMessage"></p>
+
+                    </div>
+                    <div class="form-group">
+                      <select class="form-control" id="ddl_groups" onchange="onChangeDdl_groups()">
+                          <option>--Choose your group--</option>
+                          {% for group in all_groups %}
+                          <option value="{{group.id}}">{{group}}</option>
+                          {% endfor %}
+
+                      </select>
+                    </div>
+
+<!-- Start Modal to start new period of specific group -->
+{% include 'groups/modalStartPeriod.html' %}
+<!-- End Modal to start new period of specific group -->
+
+<!-- Start Modal to add group members in specific group -->
+                    <div class="modal fade" id="addMembers" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Add member</h5>
+                            <button type="button" class="close" onclick="clearHtml()" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body"><p id="SelectedGroup"></p>
+                                <form method="post" action="" >
+                                    {% csrf_token %}
+                                    <div class="d-flex flex-column" style="height:200px">
+                                        <div class=" nav-item dropdown btn-group p-3 " data-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
+                                       <input class="p-2 row form-control " required id="newMember" name="newMember">
+                                            <ul class="dropdown-menu list-group row" id="search-results" style="width:22em; border:none; display:none;">
+                                            </ul>
+                                        </div>
+
+                                    </div>
+                                    <div class="mt-2 float-right">
+                                      <input class="btn btn-primary " type="submit" value="Add" id="addNewMember">
+                                      <button type="button" class="btn btn-danger" onclick="clearHtml()" data-dismiss="modal">Close</button>
+                                    </div>
+                                  </form>
+                              <div id="addedMessage">
+
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+<!--end modal to add group members in specific group-->
+
+                </div>
+                <div class="col-6">
+                    <p id="gname">Please select a group form the list.</p>
+                </div>
+<!-- Start Modal warning to settle all transactions-->
+<div class="modal fade" id="settle" tabindex="-1" role="dialog" aria-labelledby="settleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="settleModalLabel">Settle and start New Calculation Period</h5>
+        <button type="button" class="close" onclick="clearHtml()" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body"><p id="SelectedGroupSettle"></p>
+          <div id="settleMessage">
+              <strong >
+                  <p class="text-info">
+                      You are about settle this calculation period. You can add or remove group member now.
+                      <span class="text-danger">You can not remove member after calculation period started.</span>
+                  Are you sure you want to settle all transactions of this peroid and start new PERIOD??
+                </p>
+              </strong><br>
+              <div id="addOrRemoveMember">
+                  {% include 'groups/showGroupMember.html' %}
+              </div>
+              <a href="{% url 'calculation:settleCycle' %}" type="button" class=" btn btn-primary p-2 text-light" id="settleBtn" >Settle</a>
+
+          </div>
+          <div class="float-right">
+              <button type="button" class="btn btn-danger" onclick="clearHtml()" data-dismiss="modal">Close</button>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- End Modal warning to settle all transactions-->
+<!-- Start Modal to add expenses in selected group -->
+{% include 'groups/modalAddExp.html'%}
+<!-- end Modal to add expenses in selected group -->
+            </div>
+
+<div id="GroupRecentActivities">
+<!--  shown when group selected              -->
+    <div id="">
+    <div class="d-flex flex-row mt-3 border-top border-bottom" style="height:55px">
+        <div class="col text-center border-right {% if total_balance < 0%} text-danger {% else %} text-success {%endif%} ">Total Balance:<br> <span class="negative">$0</span></div>
+        <div class="col text-center border-right text-success">You owned:<br> <span class="negative">$0</span></div>
+        <div class="col text-center text-danger">You owe:<br> <span class="negative">-$0</span></div>
+    </div>
+
+{% for details in group_expenses %}
+    {% if details.spender == request.user %}
+    <div class="mt-2 border-bottom d-flex flex-row justify-content-start ">
+        <div class="d-flex flex-row justify-content-start">
+            <div class="p-1"><img src="{% if details.spender.pro_pic %} {{details.spender.pro_pic.url}} {% else %} {% static 'images/FAFBL.jpg' %} {% endif %} " style="height:40px; width:40px"></div>
+            <div class="p-1">{{details.spender.username}} added expenses for {{details.exp_note}} in Group {{details.group_id}} : ${{details.amount}}</div>
+        </div>
+    </div>
+    {% else %}
+    <div class="d-flex flex-row justify-content-end border-bottom mt-2">
+        <div class="d-flex flex-row justify-content-end">
+            <div class="p-1">{{details.spender.username}} added expenses for {{details.exp_note}} in Group {{details.group_id}} : ${{details.amount}}</div>
+            <div class="p-1"><img src=" {% if details.spender.pro_pic %} {{details.spender.pro_pic.url}} {% else %} {% static 'images/FAFBL.jpg' %} {% endif %}" style="height:40px; width:40px"></div>
+        </div>
+    </div>
+    {% endif %}
+{% endfor%}
+    <div>You don't any expenses in this group.</div>
+</div>
+<!--  shown when group selected              -->
+            </div>
+        </div>
+        <div id="recent1" class="CustomToggle" style="display:none; ">
+            <div class="mt-5 d-flex flex-column">
+                <div class="p-3 border" style="width:100%"> Here are your recent activities in all groups.</div>
+                <div class="border">acticities<br>sdfd</div>
+            </div>
+        </div>
+        <div id="allExpenses1" class="CustomToggle" style="display:none;">
+            <div class="mt-5 d-flex flex-column">
+                <div class="p-3 border" style="width:100%"> Here are your recent expenses in all groups.</div>
+                <div class="border">expenses<br>sdfd</div>
+            </div>
+        </div>
+        <div id="friends1" class="CustomToggle" style="display:none;">
+            <div class="mt-5 d-flex flex-column">
+                <div class="">Your friends form all groups | Search: </div>
+                <div class=" d-flex flex-column">
+                    <div>
+                        <input class="form-control" id="friendSearch" name="newMember" required>
+                    </div>
+                    <div>
+<!--                        <ul class="dropdown-menu list-group" id="search-result" style="width:22em; border:none; display:none;"></ul>-->
+                    </div>
+
+                </div>
+                <div>friend lists:</div>
+                <div class="">
+                    <div id="search-result" class="d-flex flex-column justify-content-center">
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div id="invite1" class="CustomToggle" style="display:none;">
+            <div class="mt-5">Invite your Friends to use this awesome app.<br>
+                <form method="post">
+                    {% csrf_token %}
+                    Enter a valid email address:
+                    <div>
+                        <input class="form-control" id="inviteEmail" name="inviteEmail" type="email" required="true" placeholder="New Email">
+                    </div><br>
+                    <input type="submit" id="inviteEmailbtn" class="btn btn-info text-light">
+                    <div id="inviteMessage">
+                        {{userInvited}}
+                    </div>
+                </form>
+
+            </div>
+        </div>
+        <div id="share1" class="CustomToggle" style="display:none;">
+            <div class="mt-5">
+                <!--Facebook-->
+            <button type="button" class="btn btn-facebook"><i class="fa fa-facebook pr-1"></i> Facebook</button>
+            <!--Twitter-->
+            <button type="button" class="btn btn-twitter"><i class="fa fa-twitter pr-1"></i> Twitter</button>
+            <!--Google +-->
+            <button type="button" class="btn btn-google "><i class="fa fa-google pr-1"></i> Google +</button>
+            <!--Linkedin-->
+            <button type="button" class="btn btn-linkedin"><i class="fa fa-linkedin pr-1"></i> Linkedin</button>
+            <!--Instagram-->
+            <button type="button" class="btn btn-instagram"><i class="fa fa-instagram pr-1"></i> Instagram</button>
+            <!--Pinterest-->
+            <button type="button" class="btn btn-pinterest"><i class="fa fa-pinterest pr-1"></i> Pinterest</button>
+            <!--Vkontakte-->
+            <button type="button" class="btn btn-vk"><i class="fa fa-vk pr-1"></i> Vkontakte</button>
+            <!--Stack Overflow-->
+            <button type="button" class="btn btn-so"><i class="fa fa-stack-overflow pr-1"></i> Stack Overflow</button>
+            <!--Youtube-->
+            <button type="button" class="btn btn-youtube"><i class="fa fa-youtube pr-1"></i> Youtube</button>
+            <!--Slack-->
+            <button type="button" class="btn btn-slack-hash"><i class="fa fa-slack-hash pr-1"></i> Slack</button>
+            <!--Github-->
+            <button type="button" class="btn btn-github"><i class="fa fa-github pr-1"></i> Github</button>
+            <!--Comments-->
+            <button type="button" class="btn btn-comments"><i class="fa fa-comments pr-1"></i> Comments</button>
+            <!--Email-->
+            <button type="button" class="btn btn-envelop"><i class="fa fa-envelope pr-1"></i> Email</button>
+            <!--Dribbble-->
+            <button type="button" class="btn btn-dribbble"><i class="fa fa-dribbble pr-1"></i> Dribbble</button>
+            <!--Reddit-->
+            <button type="button" class="btn btn-reddit"><i class="fa fa-reddit-alien pr-1"></i> Reddit</button>
+            <!--WhatsApp-->
+            <button type="button" class="btn btn-whatsapp"><i class="fa fa-whatsapp pr-1"></i> Whatsapp</button>
+                <a href="#" class="fa fa-facebook"></a>
+<a href="#" class=" btn fa fa-twitter"></a>
+<a href="#" class="fa fa-google"></a>
+<a href="#" class="fa fa-linkedin"></a>
+<a href="#" class="fa fa-youtube"></a>
+<a href="#" class="fa fa-instagram"></a>
+<a href="#" class="fa fa-pinterest"></a>
+<a href="#" class="fa fa-snapchat-ghost"></a>
+<a href="#" class="fa fa-skype"></a>
+<a href="#" class="fa fa-android"></a>
+<a href="#" class="fa fa-dribbble"></a>
+<a href="#" class="fa fa-vimeo"></a>
+<a href="#" class="fa fa-tumblr"></a>
+<a href="#" class="fa fa-vine"></a>
+<a href="#" class="fa fa-foursquare"></a>
+<a href="#" class="fa fa-stumbleupon"></a>
+<a href="#" class="fa fa-flickr"></a>
+<a href="#" class="fa fa-yahoo"></a>
+<a href="#" class="fa fa-reddit"></a>
+<a href="#" class="fa fa-rss"></a>
+
+            </div>
+        </div>
+
+        <!--end toggle div for left sidebar-->
+    </div>
+<!--   end   div in the middle-->
+
+<!-- start right sidebar     -->
+    <div class="col-sm-3  m-1 " >
+        <div class="d-flex flex-row justify-content-center "  id="right">
+            <!--start  toggle div for right sidebar-->
+            <div id="balance" onclick="showHideDiv(this.id)" class="col rightside activeDiv1" data-toggle="tooltip" data-placement="top" title="Balances"><i class="fa fa-align-justify"></i></div>
+            <div id="recentd" onclick="showHideDiv(this.id)" class="col rightside" data-toggle="tooltip" data-placement="top" title="Recent Data"><i class="fa fa-bar-chart"></i></div>
+            <div id="gsetting" onclick="showHideDiv(this.id)" class="col rightside" data-toggle="tooltip" data-placement="top" title="Group Setting"><i class="fa fa-cogs"></i></div>
+            <!--end  toggle div for right sidebar-->
+        </div>
+        <div class="mt-2" style="height:200px;">
+            <div id="balance1" class="rightToggle">
+                YOUR TOTAL BALANCE
+                you owe
+                $7.50
+                ADVERTISEM
+            </div>
+            <div id="recentd1" class="rightToggle" style="display:none;">
+                UPCOMING EXPENSES
+                You have not added any recurring expenses yet
+            </div>
+            <div id="gsetting1" class="rightToggle" style="display:none;">
+                TRENDS THIS MONTH
+                Total you paid for
+                $90.00
+                Your total share
+                $72.50
+                Payments made
+                $0.00
+                Payments received
+                $25.00
+                Total change in balance
+                - $7.50
+            </div>
+        </div>
+        <div>
+            <a role="button"  class="m-2 text-primary" href="{% url 'calculation:create_group' %}" >Create Group</a>
+
+        </div>
+        <div class="" style="height:250px;" id="currentGroupMember" >
+
+        </div>
+        <div class="mt-5 border">
+            Advertisement
+        </div>
+    </div>
+ <!-- end right sidebar     -->
+
+  </div>
+</div>
+<!--Start modal for adding selected friend from friend div-->
+<div class="modal fade" id="addFriendInGroup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addFriendModal">Add member</h5>
+        <button type="button" class="close" onclick="clearHtml()" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+            <form method="post" action="" >
+                {% csrf_token %}
+                <div class="d-flex flex-column" style="height:200px">
+                    <div class=" p-3 " >
+                        Select a group to add <p id="userEmail"></p>.
+                        <select class="form-control" id="ddl_created_groups" required onchange="showName()">
+                          <option value="">--Choose your group--</option>
+                          {% for group in created_groups %}
+                          <option value="{{group}}">{{group}}</option>
+                          {% endfor %}
+
+                      </select>
+                    </div>
+                </div>
+                <div class="mt-2 float-right">
+                  <input class="btn btn-primary " type="submit" value="Add" id="addFriendMember" >
+                  <button type="button" class="btn btn-danger" onclick="clearHtml()" data-dismiss="modal">Close</button>{{post}}
+                </div>
+              </form>
+          <div id="addedFriendMessage">
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--end modal for adding selected friend from friend div-->
+
+<!--End main div-->
+
+<!--start script for tooltip-->
+<script>
+ $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+ });
+</script>
+<!--end script for tooltip-->
+
+<!--start script for toggle both left and right sidebar-->
+<script>
+function showHideDiv(thisID) {
+  var id = thisID;
+  var x = document.getElementById(id+'1');
+  var y = document.getElementById(id);
+  console.log(x.className);
+  var classId = x.className;
+  if(classId == "CustomToggle"){
+    var c = document.getElementsByClassName("CustomToggle");
+
+    // Add active class to the current button (highlight it)
+    var current = document.getElementsByClassName("activeDiv");
+    current[0].classList.remove("activeDiv");
+    y.className +=" activeDiv ";
+  }
+  else{
+    var c = document.getElementsByClassName("rightToggle");
+
+    // Add active class to the current button (highlight it)
+    var current = document.getElementsByClassName("activeDiv1");
+
+    current[0].classList.remove("activeDiv1");
+    y.className +=" activeDiv1 ";
+  }
+  for( var i = 0; i<=c.length-1; i++){
+    c[i].style.display= "none";
+  }
+  x.style.display = "block";
+  if(id != 'groups'){
+   var currentGroupMember = document.getElementById("currentGroupMember");
+   var ddl_groups = document.getElementById("ddl_groups");
+   console.log(currentGroupMember);
+    currentGroupMember.innerHTML = "";
+    ddl_groups.selectedIndex = 0;
+  }
+
+
+}
+</script>
+<!--script for adding group choice, adding data-toggle attribute in id addMemData to open modal after group is selected-->
+<script>
+    function warningToMakeChanges(){
+
+        var ddl = document.getElementById("ddl_groups");
+        var ddl_selectedValue = ddl.options[ddl.selectedIndex].innerText;
+        document.getElementById("formId").style.display = 'block';
+
+        if (ddl.selectedIndex == 0)
+            {
+                alert("Please select a group to make changes.");
+            }
+        else{
+            document.getElementById('groupExp').innerHTML=ddl_selectedValue;
+            document.getElementById('SelectedGroup').innerHTML=ddl_selectedValue;
+            document.getElementById('SelectedGroupSettle').innerHTML=ddl_selectedValue;
+        }
+    }
+
+    function onChangeDdl_groups(){
+        var gname = document.getElementById("gname");
+        gname.style.display = "block";
+        var ddl = document.getElementById("ddl_groups");
+        console.log('ddl', ddl.options[ddl.selectedIndex].innerText);
+        var ddl_selectedValue = ddl.options[ddl.selectedIndex].innerText;
+        if(ddl_selectedValue == "--Choose your group--"){
+            gname.innerHTML = "Please select a group form the list.";
+        }
+        else{
+            gname.innerHTML = "Your selected group is ";
+
+            var para = document.createElement("strong");
+            var node = document.createTextNode(ddl_selectedValue);
+            para.appendChild(node);
+            var element = document.getElementById("gname");
+            element.appendChild(para);
+            para.setAttribute('class', '');
+        }
+
+        <!-- to disable the add member, settle button for non admin members-->
+
+
+
+<!-- to show group members of selected group start here       -->
+<!-- to add or remove data-toggle attribute if ddl_group is selected or diselected-->
+
+
+        if(ddl_groups.selectedIndex == 0){
+
+            document.getElementById('GroupRecentActivities').innerHTML = '';
+            document.getElementById('currentGroupMember').innerHTML = '';
+            document.getElementById('Final_Transactions').innerHTML = '';
+            }
+        if(ddl_groups.selectedIndex != 0){
+
+
+            group_id = ddl_groups.value;
+            var currentGroupMember = document.getElementById('currentGroupMember');
+            var groupMemberCycle = document.getElementById('groupMemberCycle');
+
+            console.log('ajax jss', group_id);
+            event.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url:'{% url 'calculation:getMemberOfGroup' %}',
+                data:{'groupName': group_id, 'csrfmiddlewaretoken': '{{csrf_token}}'},
+                dataType: 'json',
+                success: function(response){
+                    $('#GroupRecentActivities').html(response['group']);
+                   $('#currentGroupMember').html(response['post']);
+                   $('#groupMemberCycle').html(response['groupMemberCycle']);
+                   $('#addOrRemoveMember').html(response['post']);
+                   $('#Final_Transactions').html(response['final_transaction']);
+                    console.log($('#currentGroupMember').html(response['post']));
+
+                },
+                error: function(response, e){
+                    $('#currentGroupMember').html(response['post'])
+                }
+            });
+        }
+<!-- to show group members of selected group end  here       -->
+
+    }
+</script>
+<!--end script for toggle both left and right sidebar-->
+<script>
+    function clearHtml(){
+    console.log('clearHTML');
+     document.getElementById('addedFriendMessage').innerHTML = "";
+     document.getElementById('addedMessage').innerHTML = "";
+     document.getElementById('addedExpMessage').innerHTML = "";
+     document.getElementById('id_amount').value = "";
+     document.getElementById('id_exp_note').value = "";
+     document.getElementById('newMember').value = "";
+     document.getElementById('id_bill').value = "";
+     document.getElementById('search-results').style.display = "none";
+
+     }
+</script>
+
+{% endblock%}

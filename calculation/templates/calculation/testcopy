@@ -1,0 +1,161 @@
+<script src="http://codeorigin.jquery.com/jquery-1.10.2.min.js"></script>
+<script>
+
+$(window).on('load', function(){
+    console.log('load');
+    var rand = Math.floor(Math.random()*2000);
+
+});
+
+</script>
+{% include 'household/master.html' %}
+{% block body%}
+<body>
+{{a}}
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+            Jeevan:  <input class="add" type="number" name="jeevan" id="jeevan" value="650"><br>
+            Sunil:  <input class="add"  type="number" name="sunil" id="sunil" value="350"><br>
+            Rohan:  <input class="add"  type="number" name="rohan" id="rohan" value="500"><br>
+            Bishal:  <input class="add"  type="number" name="bishal" id="bishal" value="100"><br>
+            Pradeep:  <input class="add"  type="number" name="pradeep" id="pradeep" value="300"><br>
+            Mohan:  <input class="add"  type="number" name="mohan" id="mohan" value="150"><br>
+            Nitin:  <input class="add"  type="number" name="nitin" id="nitin" value="700"><br>
+            Sandeep:  <input class="add"  type="number" name="sandeep" id="sandeep" value="450"><br>
+            Bigyan:  <input class="add"  type="number" name="bigyan" id="bigyan" value="250"><br>
+            Nischal:  <input class="add"  type="number" name="nischal" id="nischal" value="50"><br>
+        <button class="btn btn-dark" id="add">ADD</button>
+    </div>
+    <div class="col-sm">
+
+    </div>
+    <div class="col-sm">
+      From <label id="from"></label>  to<label id="to"></label>
+    </div>
+  </div>
+    <div>
+        <p>Total:  <label id="total" class="text-danger">0</label></p>
+        <p>Per Head:  <label id="perhead">0</label></p>
+    </div>
+</div>
+</body>
+{% endblock %}
+
+<script>
+
+        function add() {
+            var sum = 0;
+            var perhead = 0;
+            $(".add").each(function() {
+                sum += +this.value;
+            });
+
+            perhead = (sum/10).toPrecision(6);
+            //return two values as an array.
+            return [sum, perhead];
+        }
+
+        $('#add').click(function() {
+            var total = new add() //creating array object of function add
+            //retrieve value of an array of respective index
+            sum = total[0];
+            perhead = total[1];
+
+            //showing those values in the html
+            $('#total').html(sum);
+            $('#perhead').html(perhead);
+
+            //call function to calculate difference between per head and expenses
+            difference(perhead);
+            // for clearing the input box
+<!--            $(".add").each(function() {-->
+<!--                $('.add').val('');-->
+
+<!--            });-->
+
+        });
+
+        function difference(perhead){
+            var Ndata = []; // initializing new dict for negative value - less than perhead
+            var Pdata = []; // initializing new dict for positive value -  more than perhead
+            var Zdata = []; // initializing new dict for equal to perhead value
+            $(".add").each(function() {
+                var diff = (this.value-perhead).toPrecision(6);
+                //console.log(this.value, this.name);
+                if(diff>0){
+                    Pdata.push({
+                                'name': this.name,
+                                'expenses': this.value,
+                                'perhead': perhead,
+                                'giveORreceive':diff,
+                              });
+                           }
+                else if(diff<0){
+                    Ndata.push({
+                                'name': this.name,
+                                'expenses': this.value,
+                                'perhead': perhead,
+                                'giveORreceive':diff,
+                              });
+                           }
+                 else if(diff===0){
+                    Zdata.push({
+                                'name': this.name,
+                                'expenses': this.value,
+                                'perhead': perhead,
+                                'giveORreceive':diff,
+                              });
+                           }
+            });
+//print all dict
+<!--             console.log(Pdata);-->
+<!--             console.log(Ndata);-->
+<!--             console.log(Zdata);-->
+
+                // sort dictionary value by give or reveive amount
+                // use slice() to copy the array and not just make a reference
+
+                //sorting of Pdata
+                var PdataSorted = Pdata.slice(0);
+                PdataSorted.sort(function(b,a) {
+                        return a.giveORreceive - b.giveORreceive;
+                    });
+                    console.log('Receiver data sorted by give or receive:');
+                    console.log(PdataSorted);
+
+
+                //sorting of Ndata
+                var NdataSorted = Ndata.slice(0);
+                NdataSorted.sort(function(a,b) {
+                        return a.giveORreceive - b.giveORreceive;
+                    });
+                    console.log('Giver data sorted by give or receive:');
+                    console.log(NdataSorted);
+
+
+                //sorting of Zdata
+                // we don't need to sort this dict because it will have all strictly zero in give or receive
+
+                /// the calculation part is below
+                ///
+                for(i=0; i<PdataSorted.length; i++){
+                    console.log(PdataSorted[i]['giveORreceive'], 'reveiver');}
+                for(i=0; i<NdataSorted.length; i++){
+                    console.log(NdataSorted[i]['giveORreceive'], 'giver');}
+
+
+
+                                 ///
+                 ///calculation part ends
+
+        // function ends here
+        }
+
+
+
+
+
+
+</script>
